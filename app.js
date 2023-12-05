@@ -13,10 +13,11 @@ import session from "express-session";
 const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://127.0.0.1:27017/kanbas'
 
 mongoose.connect(CONNECTION_STRING);
-console.log("Environment", process.env.FRONTEND_URL)
+
+
 
 const app = express()
-app.use(express.json());
+
 app.use(cors({
   credentials: true,
   origin: process.env.FRONTEND_URL
@@ -37,7 +38,7 @@ app.use(cors({
   }
   app.use(session(sessionOptions));
 
-  
+app.use(express.json());
 UserRoutes(app);
 CourseRoutes(app);
 ModuleRoutes(app);
